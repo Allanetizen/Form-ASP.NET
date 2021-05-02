@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using PartyInvitess.Models;
-
+using System.Linq;
 
 namespace PartyInvitess.Controllers
 {
@@ -25,5 +25,10 @@ namespace PartyInvitess.Controllers
             Repository.AddResponse(guestResponse);
             return View("Thanks", guestResponse);
         }
+        public ViewResult ListResponses()
+        {
+            return View(Repository.Responses.Where(r => r.WillAttend == true));
+        }//The collection of GuestResponse objects is filtered using LINQ so that only positive
+       // responses are used.
     }
 }
